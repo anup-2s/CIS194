@@ -4,6 +4,7 @@ module HW1
   , doubleEveryOther
   , sumDigits
   , validate
+  , hanoi
   ) where
 
 toDigitsRev :: Integer -> [Integer]
@@ -28,7 +29,7 @@ sumDigits :: [Integer] -> Integer
 sumDigits = sum . concatMap toDigitsRev
 
 validate :: Integer -> Bool
-validate = (==) 0 . flip mod 10 . sumDigits . doubleEveryOther . toDigits
+validate = (==) 0 . (`mod` 10) . sumDigits . doubleEveryOther . toDigits
 
 type Peg = String
 
@@ -36,7 +37,7 @@ type Move = (Peg, Peg)
 
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
 hanoi 1 from target _ = [(from, target)]
-hanoi n from target storage = back ++ ((from, target) : stash)
+hanoi n from target storage = stash ++ ((from, target) : back)
   where
     n' = n - 1
     back = hanoi n' storage target from
