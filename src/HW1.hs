@@ -25,7 +25,7 @@ doubleEveryOther = snd . foldr helper (False, [])
     helper x (False, xs) = (True, x : xs)
 
 sumDigits :: [Integer] -> Integer
-sumDigits = sum . concatMap toDigits
+sumDigits = sum . concatMap toDigitsRev
 
 validate :: Integer -> Bool
 validate = (==) 0 . flip mod 10 . sumDigits . doubleEveryOther . toDigits
