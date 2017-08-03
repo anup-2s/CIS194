@@ -29,3 +29,15 @@ sumDigits = sum . concatMap toDigits
 
 validate :: Integer -> Bool
 validate = (==) 0 . flip mod 10 . sumDigits . doubleEveryOther . toDigits
+
+type Peg = String
+
+type Move = (Peg, Peg)
+
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi 1 from target _ = [(from, target)]
+hanoi n from target storage = back ++ ((from, target) : stash)
+  where
+    n' = n - 1
+    back = hanoi n' storage target from
+    stash = hanoi n' from storage target
