@@ -1,8 +1,11 @@
+-- This file has been generated from package.yaml by hpack version 0.17.1.
+--
+-- see: https://github.com/sol/hpack
+
 name:                CIS194
 version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/githubuser/CIS194#readme
+homepage:            https://github.com/anup-2s/CIS194#readme
+bug-reports:         https://github.com/anup-2s/CIS194/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Anup Kishore
@@ -10,32 +13,37 @@ maintainer:          anup.kishore@gmail.com
 copyright:           2017 Anup Kishore
 category:            Web
 build-type:          Simple
-extra-source-files:  README.md
-cabal-version:       >=1.10
+cabal-version:       >= 1.10
 
-library
-  hs-source-dirs:      src
-  exposed-modules:     Lib
-  build-depends:       base >= 4.7 && < 5
-  default-language:    Haskell2010
-
-executable CIS194-exe
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , CIS194
-  default-language:    Haskell2010
-
-test-suite CIS194-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       base
-                     , CIS194
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  default-language:    Haskell2010
+extra-source-files:
+    README.md
 
 source-repository head
-  type:     git
+  type: git
   location: https://github.com/anup-2s/CIS194
+
+library
+  hs-source-dirs:
+      src
+  exposed-modules:
+      Lib
+      HW1
+  other-modules:
+      Paths_CIS194
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite CIS194-test
+  type: exitcode-stdio-1.0
+  hs-source-dirs:
+      test
+  main-is: Spec.hs
+  build-depends:
+      base
+    , CIS194
+    , hspec
+  other-modules:
+      HW1Spec
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  default-language: Haskell2010
