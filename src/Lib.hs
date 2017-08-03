@@ -1,6 +1,9 @@
 module Lib
-    ( someFunc
+    ( status
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+status :: IO ()
+status = do
+  putStrLn "Homework 1:"
+  putStrLn "- Credit Card Validation: Done"
+
