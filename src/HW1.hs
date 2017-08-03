@@ -6,16 +6,16 @@ module HW1
   , validate
   ) where
 
-toDigits :: Integer -> [Integer]
-toDigits x
-  | x < 10 = [x]
-  | otherwise = x' : toDigits xs
+toDigitsRev :: Integer -> [Integer]
+toDigitsRev x
+  | x <= 0 = []
+  | otherwise = x' : toDigitsRev xs
   where
     x' = x `mod` 10
     xs = x `div` 10
 
-toDigitsRev :: Integer -> [Integer]
-toDigitsRev = reverse . toDigits
+toDigits :: Integer -> [Integer]
+toDigits = reverse . toDigitsRev
 
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther = snd . foldr helper (False, [])

@@ -1,2 +1,6 @@
+import qualified HW1Spec as HW1
+
+import Test.Hspec
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec $ describe "Homework 1" HW1.spec
