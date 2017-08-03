@@ -10,8 +10,8 @@ spec = do
   exercise1
   exercise2
   exercise3
-  -- exercise4
-  -- exercise5
+  exercise4
+  exercise5
 
 exercise1 :: Spec
 exercise1 =
@@ -28,5 +28,17 @@ exercise2 =
     it "doubles an odd length list" $ doubleEveryOther [1, 2, 3] `shouldBe` [1, 4, 3]
 
 exercise3 :: Spec
-exercise3 =
-  describe "sumDigits" $ it "sums with tens" $ sumDigits [16,7,12,5] `shouldBe` 22
+exercise3 = describe "sumDigits" $ it "sums with tens" $ sumDigits [16, 7, 12, 5] `shouldBe` 22
+
+baseCard = 4012888888881881
+
+exercise4 :: Spec
+exercise4 =
+  describe "validate" $ do
+    it ("validates   " ++ show baseCard) $ validate baseCard `shouldBe` True
+    it ("invalidates " ++ (show . (+ 1)) baseCard) $ validate (baseCard + 1) `shouldBe` False
+
+exercise5 :: Spec
+exercise5 =
+  describe "hanoi" $
+  it "Solves 2" $ hanoi 2 "a" "b" "c" `shouldBe` [("a", "c"), ("a", "b"), ("c", "b")]
