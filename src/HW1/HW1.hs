@@ -1,4 +1,4 @@
-module HW1
+module HW1.HW1
   ( toDigits
   , toDigitsRev
   , doubleEveryOther
@@ -42,3 +42,11 @@ hanoi n from target storage = stash ++ ((from, target) : back)
     n' = n - 1
     back = hanoi n' storage target from
     stash = hanoi n' from storage target
+
+reve :: Integer -> Peg -> Peg -> Peg -> Peg -> [Move]
+reve 0 _ _ _ _ = []
+reve 1 from target _ _ = [(from, target)]
+reve n from target storage storage2 =
+  reve (n - k) from storage target storage2 ++ hanoi k from target storage2
+  where
+    k = div n 2

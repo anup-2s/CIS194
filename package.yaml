@@ -12,7 +12,7 @@ library:
   source-dirs: src
   exposed-modules:
   - Lib
-  - HW1
+  - HW1.HW1
   dependencies:
   - base >=4.7 && <5
 tests:

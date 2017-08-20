@@ -2,7 +2,7 @@ module HW1Spec
   ( spec
   ) where
 
-import HW1
+import HW1.HW1
 import Test.Hspec
 
 spec :: Spec

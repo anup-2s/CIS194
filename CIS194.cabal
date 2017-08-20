@@ -27,8 +27,9 @@ library
       src
   exposed-modules:
       Lib
-      HW1
+      HW1.HW1
   other-modules:
+      Log
       Paths_CIS194
   build-depends:
       base >=4.7 && <5
