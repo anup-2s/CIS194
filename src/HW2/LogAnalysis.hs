@@ -9,13 +9,13 @@ parseTS :: String -> TimeStamp
 parseTS = read
 
 parseMessage' :: [String] -> LogMessage
-parseMessage' ["E", sev, ts, msg] =
+parseMessage' ("E":sev:ts:msg) =
   let sev' = read sev :: Int
       err = Error sev'
       ts' = parseTS ts
-  in LogMessage err ts' msg
-parseMessage' ["I", ts, msg] = LogMessage Info (parseTS ts) msg
-parseMessage' ["W", ts, msg] = LogMessage Warning (parseTS ts) msg
+  in LogMessage err ts' (unwords msg)
+parseMessage' ("I":ts:msg) = LogMessage Info (parseTS ts) (unwords msg)
+parseMessage' ("W":ts:msg) = LogMessage Warning (parseTS ts) (unwords msg)
 parseMessage' s = Unknown $ unwords s
 
 parseMessage :: String -> LogMessage
