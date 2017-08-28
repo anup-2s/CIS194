@@ -12,7 +12,7 @@ toDigitsRev x
   | x <= 0 = []
   | otherwise = x' : toDigitsRev xs
   where
-    x' = x `mod` 10
+    x' = x `rem` 10
     xs = x `div` 10
 
 toDigits :: Integer -> [Integer]
@@ -36,10 +36,11 @@ type Peg = String
 type Move = (Peg, Peg)
 
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi 0 _ _ _ = []
 hanoi 1 from target _ = [(from, target)]
 hanoi n from target storage = stash ++ ((from, target) : back)
   where
-    n' = n - 1
+    n' = max 0 (n - 1)
     back = hanoi n' storage target from
     stash = hanoi n' from storage target
 
