@@ -29,7 +29,8 @@ library
       Lib
       HW1.HW1
   other-modules:
-      Log
+      HW2.Log
+      HW2.LogAnalysis
       Paths_CIS194
   build-depends:
       base >=4.7 && <5
