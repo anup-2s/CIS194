@@ -15,6 +15,7 @@ library:
   - HW1.HW1
   dependencies:
   - base >=4.7 && <5
+  - split >= 0.2.3
 tests:
   CIS194-test:
     main: Spec.hs
@@ -23,6 +24,8 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
+    - -Wwarn
     dependencies:
     - base
     - CIS194
