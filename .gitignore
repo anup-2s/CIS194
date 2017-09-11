@@ -21,6 +21,9 @@ cabal.project.local
 .HTF/
 .ghc.environment.*
 
+## Hpack
+CIS194.cabal
+
 ## Vim
 # Swap
 [._]*.s[a-v][a-z]
