@@ -16,6 +16,7 @@ library:
   dependencies:
   - base >=4.7 && <5
   - split >= 0.2.3
+  - containers
 tests:
   CIS194-test:
     main: Spec.hs
