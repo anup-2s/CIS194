@@ -3,8 +3,7 @@
 module HW3.Golf where
 
 import Data.List.Split (chunksOf)
-import Data.Map.Lazy
-       (fromListWith, toList, Map, lookup, foldrWithKey, insert, empty)
+import qualified Data.Map.Lazy as M
 
 nth :: [a] -> Int -> [a]
 nth xs n = map head . chunksOf n . drop n $ xs
@@ -18,25 +17,26 @@ localMaxima (a:b:c:x)
   | otherwise = localMaxima (c : x)
 localMaxima _ = []
 
-d' k v m
+createMap :: [Int] -> M.Map Int Int
+createMap = M.fromListWith (+) . map (, 1)
+
+reduceVals' :: Int -> Int -> M.Map Int Int -> M.Map Int Int
+reduceVals' k v m
   | v <= 1 = m
-  | otherwise = insert k (v - 1) m
+  | otherwise = M.insert k (v - 1) m
 
-d :: Map Int Int -> String -> (String, Map Int Int)
-d m s = (s, foldrWithKey d' empty m)
+reduceVals :: M.Map Int Int -> M.Map Int Int
+reduceVals = M.foldrWithKey reduceVals' M.empty
 
-r'' :: Map Int Int -> String
-r'' m = concatMap (maybe " " (const "*") . (`Data.Map.Lazy.lookup` m)) [0 .. 9]
+keysToValues :: M.Map Int Int -> String
+keysToValues m = concatMap (maybe " " (const "*") . flip M.lookup m) [0 .. 9]
 
-r''' :: (String, Map Int Int) -> ([String], Map Int Int)
-r''' (s, m) = (s : fst (r' m), m)
+getCounts :: [String] -> M.Map Int Int -> [String]
+getCounts s m
+  | null m = s
+  | otherwise = getCounts (keysToValues m : s) (reduceVals m)
 
-r' :: Map Int Int -> ([String], Map Int Int)
-r' map
-  | null map = (["========", "0123456789"], map)
-  | otherwise = r''' . d map . r'' $ map
+appendBase :: [String] -> [String]
+appendBase = (++ ["==========", "0123456789"])
 
-r :: Map Int Int -> String
-r =  unlines . fst . r'
-
-histogram = r . fromListWith (+) . map (, 1)
+histogram = unlines . appendBase . getCounts [] . createMap
